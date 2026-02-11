@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { computed, ref, nextTick } from 'vue'
 
+//tab properties
 interface TabItem {
   label: string
   value: string
 }
 
+//tab props
 const props = defineProps<{
   tabs: TabItem[]
   modelValue: string
 }>()
 
+//update value function
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
 
-
+//active tab focus
 const activeTab = computed({
   get: () => props.modelValue,
   set: (val: string) => emit('update:modelValue', val)
@@ -28,6 +31,7 @@ const selectTab = async (value: string, index: number) => {
   
 }
 
+//tabs scroll by arrow buttons
 const handleKeydown = (event: KeyboardEvent) => {
   if (!props.tabs.length) return
 
@@ -54,7 +58,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 <template>
   <div>
-    <!-- Tabs -->
+    <!-- tabs -->
     <div
       role="tablist"
       aria-label="Tabs"
@@ -80,7 +84,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       </button>
     </div>
 
-    <!-- Panels -->
+    <!-- panels -->
     <div
   v-for="tab in tabs"
   :key="tab.value"

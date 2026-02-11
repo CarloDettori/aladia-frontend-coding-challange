@@ -8,7 +8,7 @@ import BaseTab from "~/components/ui/BaseTab.vue"
 
 
 
-//for buttons
+//functions for button click
 function handleClick(variant: string) {
   alert(`Clicked on ${variant}!`)
 }
@@ -17,6 +17,7 @@ function handleActionClick(action: number) {
   alert(`Clicked on action ${action}!`)
 }
 
+//number of clickable buttons
 const buttons =[
   {
     id:1,
@@ -38,20 +39,22 @@ const buttons =[
   },
 ]
 
-//for modal
+//state for modal
 const isOpen = ref(false)
 
-//for inputfield
+//consts for inputfield
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
 const error = ref('')
 const success = ref(false)
 
+//mail validation
 const validateEmail = (value: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
+//submit management
 const onSubmit = async () => {
   error.value = ''
   success.value = false
@@ -78,20 +81,16 @@ const onSubmit = async () => {
   password.value = ''
 }
 
-function validate() {
-  if (!email.value.includes('@')) {
-    error.value = 'Please enter a valid email address'
-  } else {
-    error.value = ''
-  }
-}
 
-//for tabs
+//initial status for tabs
 const activeTab = ref('login')
 
+//number of clickable tabs
 const tabs = [
   { label: 'Login', value: 'login' },
-  { label: 'Register', value: 'register' }
+  { label: 'Register', value: 'register' },
+  { label: 'Info', value: 'info' },
+  { label: 'Contact', value: 'contact' }
 ]
 
 </script>
@@ -99,12 +98,15 @@ const tabs = [
 <template>
   <div  class="min-h-screen bg-gray-900 text-white bg-[url(/public/hexagonTexture.png)]">
     <h1 class="pt-20 font-bold text-center text-2xl">FRONTEND CODING CHALLANGE <br> BY CARLO DETTORI</h1>
+    <!-- buttons rendering -->
     <h1 class="pt-20 font-bold text-center">BUTTONS</h1>
     <div class="w-full p-10 flex flex-col sm:flex-row gap-5 justify-center ">
       <BaseButton v-for="button in buttons" :key="button.id" @click="handleClick(button.variant || 'primary')" :variant="button.variant || ''" :size="button.size || ''" :disabled="button.disabled">
         {{ button.variant ? button.variant.charAt(0).toUpperCase() + button.variant.slice(1) : 'Primary' }} Alert!
       </BaseButton>
   </div>
+
+  <!-- Cards rendering (3 cards from loop) -->
   <h1 class="mt-20 font-bold text-center">CARDS</h1>
   
 <div class="w-full p-10 flex flex-col sm:flex-row gap-5 justify-center">
@@ -125,6 +127,7 @@ const tabs = [
 </BaseCard>
     </div>
   
+    <!-- modal rendering -->
 <h1 class="mt-20 font-bold text-center">MODAL</h1>
 <div class="p-10">
 
@@ -159,6 +162,8 @@ click on <strong>Confirm</strong> to go on <br> click on <strong>Cancel</strong>
 
 <h1 class="mt-20 font-bold text-center">INPUT FIELD</h1>
 <div class="flex justify-center items-center p-6">
+
+  <!--multiple input field rendered inside a card component -->
 <BaseCard>
 <form @submit.prevent="onSubmit" class="space-y-4">
 
@@ -197,7 +202,9 @@ click on <strong>Confirm</strong> to go on <br> click on <strong>Cancel</strong>
       </form>
 </BaseCard>
 </div>
-<h1 class="mt-20 font-bold text-center">LOG / REGISTER IN TAB</h1>
+
+<!-- tab with 4 section (minimal design) -->
+<h1 class="mt-20 font-bold text-center">TAB</h1>
 <div class="flex justify-center items-center p-6 pb-20">
   <BaseTab v-model="activeTab" :tabs="tabs">
     <template #default="{ active }">
@@ -207,6 +214,12 @@ click on <strong>Confirm</strong> to go on <br> click on <strong>Cancel</strong>
 
       <div v-if="active === 'register'">
         Register content
+      </div>
+      <div v-if="active === 'info'">
+        Info content
+      </div>
+      <div v-if="active === 'contact'">
+        Contact infirmation
       </div>
     </template>
   </BaseTab>

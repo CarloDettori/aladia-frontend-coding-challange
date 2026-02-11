@@ -12,10 +12,12 @@ const emit = defineEmits(['update:modelValue'])
 
 const modalRef = ref<HTMLElement | null>(null)
 
+    //close modal by clicking out the modal
 function close() {
   emit('update:modelValue', false)
 }
 
+//close modal by escape key
 function handleEsc(e: KeyboardEvent) {
   if (e.key === 'Escape') {
     close()
@@ -47,13 +49,13 @@ onUnmounted(() => {
       v-if="modelValue"
       class="fixed inset-0 z-50 flex items-center justify-center"
     >
-      <!-- Overlay -->
+      <!-- darker overlay -->
       <div
         class="absolute inset-0 bg-black/50"
         @click="close"
       ></div>
 
-      <!-- Modal content -->
+      <!-- modal content -->
       <div
         ref="modalRef"
         tabindex="-1"
@@ -61,7 +63,7 @@ onUnmounted(() => {
         aria-modal="true"
         class="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-lg w-full mx-4 z-10 outline-none"
       >
-        <!-- Header -->
+        <!-- title -->
         <div
           v-if="$slots.header"
           class="px-6 py-4 border-b border-gray-200 dark:border-gray-700"
@@ -69,12 +71,12 @@ onUnmounted(() => {
           <slot name="header" />
         </div>
 
-        <!-- Body -->
+        <!-- content -->
         <div class="px-6 py-4">
           <slot />
         </div>
 
-        <!-- Footer -->
+        <!-- footer -->
         <div
           v-if="$slots.footer"
           class="px-6 py-4 border-t border-gray-200 dark:border-gray-700"
@@ -86,6 +88,7 @@ onUnmounted(() => {
   </Transition>
 </template>
 
+<!-- some animation for closing and opening transition -->
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

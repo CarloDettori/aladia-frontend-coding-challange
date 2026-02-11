@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useId } from 'vue'
 
+//props for a single input field
 const props = defineProps({
   modelValue: {
     type: String,
@@ -29,15 +30,18 @@ const props = defineProps({
   }
 })
 
+//trigger const for updaating value
 const emit = defineEmits(['update:modelValue'])
 
 const inputId = useId()
 
+//updating function for  value menagement
 function updateValue(event: Event) {
   const target = event.target as HTMLInputElement
   emit('update:modelValue', target.value)
 }
 
+//validation styling
 const inputClasses = computed(() => [
   "w-full rounded-lg border px-4 py-2 transition outline-none",
   props.error
@@ -52,7 +56,7 @@ const inputClasses = computed(() => [
 <template>
   <div class="w-full">
     
-    <!-- Label -->
+    <!-- label -->
     <label
       v-if="label"
       :for="inputId"
@@ -61,10 +65,10 @@ const inputClasses = computed(() => [
       {{ label }}
     </label>
 
-    <!-- Input wrapper -->
+    <!-- input wrapper -->
     <div class="relative">
       
-      <!-- Slot left -->
+      <!-- slot left -->
       <div
         v-if="$slots.left"
         class="absolute inset-y-0 left-0 flex items-center pl-3"
@@ -88,7 +92,7 @@ const inputClasses = computed(() => [
         @input="updateValue"
       />
 
-      <!-- Slot right -->
+      <!-- slot right -->
       <div
         v-if="$slots.right"
         class="absolute inset-y-0 right-0 flex items-center pr-3"
@@ -97,7 +101,7 @@ const inputClasses = computed(() => [
       </div>
     </div>
 
-    <!-- Error message -->
+    <!-- error message -->
     <p
       v-if="error"
       :id="`${inputId}-error`"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+//card props
 const props = defineProps({
   shadow: {
     type: Boolean,
@@ -12,8 +13,7 @@ const props = defineProps({
   }
 })
 
-const baseClasses =
-  "rounded-xl bg-white dark:bg-gray-800 transition"
+const baseClasses = "rounded-xl bg-white dark:bg-gray-800 transition"
 
 const shadowClass = computed(() =>
   props.shadow ? "shadow-lg" : ""
@@ -26,15 +26,15 @@ const borderClass = computed(() =>
 
 <template>
   <div :class="[baseClasses, shadowClass, borderClass]">
-    
+    <!-- card title -->
     <div v-if="$slots.header" class="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
       <slot name="header" />
     </div>
-
+<!-- card content -->
     <div class="px-6 py-4">
       <slot />
     </div>
-
+<!-- card footer -->
     <div v-if="$slots.footer" class="px-6 py-4 border-t border-gray-100 dark:border-gray-700">
       <slot name="footer" />
     </div>

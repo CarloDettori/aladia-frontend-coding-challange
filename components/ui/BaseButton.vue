@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+//buttons props
 const props = defineProps({
   variant: {
     type: String,
@@ -16,11 +17,12 @@ const props = defineProps({
   }
 })
 
+//click trigger
 const emit = defineEmits(['click'])
 
-const baseClasses =
-  "rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2"
+const baseClasses ="rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2"
 
+//button appareance
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'secondary':
@@ -32,6 +34,7 @@ const variantClasses = computed(() => {
   }
 })
 
+//button size
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'sm':
@@ -44,7 +47,9 @@ const sizeClasses = computed(() => {
 })
 </script>
 
+
 <template>
+  <!-- BaseButton Component return -->
   <button
     :class="[baseClasses, variantClasses, sizeClasses]"
     :disabled="disabled"

@@ -24,4 +24,76 @@ inside the folder component
 ─ BaseModal.vue
 ─ BaseTabs.vue
 
-###BaseButton.vue
+Reusable button component with variants and sizes.
+
+**Props**
+- `variant`: `'primary' | 'secondary' | 'danger'`
+- `size`: `'sm' | 'md' | 'lg'`
+- `disabled`: `boolean`
+
+**Slots**
+- default slot for button content
+
+**Events**
+- `click`
+
+---
+
+### BaseInputField
+
+Accessible input field with label and error handling.
+
+**Props**
+- `modelValue`
+- `label`
+- `type`
+- `placeholder`
+- `required`
+- `error`
+
+**Events**
+- `update:modelValue`
+
+---
+
+### BaseCard
+
+Simple layout component used as a container.
+
+**Slots**
+- default slot
+
+---
+
+### BaseModal
+
+Modal dialog with overlay and focus trapping.
+
+**Props**
+- `open`
+
+**Events**
+- `close`
+
+---
+
+### BaseTabs
+
+Accessible tabs component following WAI-ARIA guidelines.
+
+**Props**
+- `tabs`: `{ label, value }[]`
+- `modelValue`
+
+**Events**
+- `update:modelValue`
+
+**Accessibility**
+- Keyboard navigation (Arrow keys, Home, End)
+- Proper ARIA roles (`tablist`, `tab`, `tabpanel`)
+- Focus management
+
+---
+
+
+#EACH COMPONENT RENDERED IN index.vue file
