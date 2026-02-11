@@ -1,18 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue"
 import BaseButton from "~/components/ui/BaseButton.vue"
 import BaseCard from '~/components/ui/BaseCard.vue'
 import BaseModal from '~/components/ui/BaseModal.vue'
 import BaseInputField from "~/components/ui/BaseInputField.vue"
+import BaseTab from "~/components/ui/BaseTab.vue"
 
 
 
 //for buttons
-function handleClick(variant) {
+function handleClick(variant: string) {
   alert(`Clicked on ${variant}!`)
 }
 
-function handleActionClick(action) {
+function handleActionClick(action: number) {
   alert(`Clicked on action ${action}!`)
 }
 
@@ -21,7 +22,7 @@ const buttons =[
     id:1,
     variant:"",
     size:"sm",
-    disabled: null
+    disabled: false
   },
   {
     id:2,
@@ -42,7 +43,40 @@ const isOpen = ref(false)
 
 //for inputfield
 const email = ref('')
+const password = ref('')
+const loading = ref(false)
 const error = ref('')
+const success = ref(false)
+
+const validateEmail = (value: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
+const onSubmit = async () => {
+  error.value = ''
+  success.value = false
+
+  if (!email.value || !password.value) {
+    error.value = 'All fields are required'
+    return
+  }
+
+  if (!validateEmail(email.value)) {
+    error.value = 'Invalid email format'
+    return
+  }
+
+  loading.value = true
+
+  // Simulazione chiamata API
+  await new Promise(resolve => setTimeout(resolve, 1500))
+
+  loading.value = false
+  success.value = true
+
+  email.value = ''
+  password.value = ''
+}
 
 function validate() {
   if (!email.value.includes('@')) {
@@ -51,6 +85,14 @@ function validate() {
     error.value = ''
   }
 }
+
+//for tabs
+const activeTab = ref('login')
+
+const tabs = [
+  { label: 'Login', value: 'login' },
+  { label: 'Register', value: 'register' }
+]
 
 </script>
 
@@ -63,7 +105,7 @@ function validate() {
         {{ button.variant ? button.variant.charAt(0).toUpperCase() + button.variant.slice(1) : 'Primary' }} Alert!
       </BaseButton>
   </div>
-  <h1 class="mt-20 font-bold text-center">CARD</h1>
+  <h1 class="mt-20 font-bold text-center">CARDS</h1>
   
 <div class="w-full p-10 flex flex-col sm:flex-row gap-5 justify-center">
       <BaseCard v-for="i in 3" :key="i" bordered class="sm:max-w-lg ">
@@ -93,12 +135,12 @@ function validate() {
     <BaseModal v-model="isOpen">
   <template #header>
     <h2 class="text-xl font-semibold">
-      Advanced Modal
+      MODAL
     </h2>
   </template>
 
-  This modal now supports structured slots and animations.
-
+  Hi, that's a nice modal! <br>
+click on <strong>Confirm</strong> to go on <br> click on <strong>Cancel</strong> to close the modal
   <template #footer>
     <div class="flex justify-end gap-2">
       <BaseButton variant="secondary" @click="isOpen = false">
@@ -112,23 +154,63 @@ function validate() {
 </BaseModal>
 
   </div>
-  <h1 class="mt-20 font-bold text-center">INPUT FIELD</h1>
+ 
 
-<div class="p-10 max-w-md space-y-4">
-    
-    <BaseInputField
-      v-model="email"
-      label="Email"
-      placeholder="Enter your email"
-      :error="error"
-    />
 
-    <BaseButton @click="validate">
-      Validate
-    </BaseButton>
+<h1 class="mt-20 font-bold text-center">INPUT FIELD</h1>
+<div class="flex justify-center items-center p-6">
+<BaseCard>
+<form @submit.prevent="onSubmit" class="space-y-4">
 
-  </div>
+        <BaseInputField
+          v-model="email"
+          label="Email"
+          type="email"
+          placeholder="Enter your email"
+          required
+        />
 
+        <BaseInputField
+          v-model="password"
+          label="Password"
+          type="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <p v-if="error" class="text-red-600 text-sm">
+          {{ error }}
+        </p>
+
+        <p v-if="success" class="text-green-600 text-sm">
+          Login successful!
+        </p>
+
+        <BaseButton
+          type="submit"
+          :disabled="loading"
+          class="w-full"
+        >
+          {{ loading ? 'Loading...' : 'Login' }}
+        </BaseButton>
+
+      </form>
+</BaseCard>
+</div>
+<h1 class="mt-20 font-bold text-center">LOG / REGISTER IN TAB</h1>
+<div class="flex justify-center items-center p-6 pb-20">
+  <BaseTab v-model="activeTab" :tabs="tabs">
+    <template #default="{ active }">
+      <div v-if="active === 'login'">
+        Login content
+      </div>
+
+      <div v-if="active === 'register'">
+        Register content
+      </div>
+    </template>
+  </BaseTab>
+</div>
 </div>
 
 </template>
