@@ -51,9 +51,9 @@ const handleKeydown = (event: KeyboardEvent) => {
 </script>
 
 <template>
-  <div>
+  <div class="w-full sm:w-auto">
     <!-- tabs -->
-    <div role="tablist" aria-label="Tabs" class="flex border-b">
+    <div role="tablist" aria-label="Tabs" class="flex flex-col sm:flex-row border-b">
       <button
         v-for="(tab, index) in tabs"
         :key="tab.value"
@@ -62,7 +62,7 @@ const handleKeydown = (event: KeyboardEvent) => {
         :aria-selected="activeTab === tab.value"
         :aria-controls="`panel-${tab.value}`"
         :tabindex="activeTab === tab.value ? 0 : -1"
-        class="px-4 py-2 -mb-px border-b-2 transition focus:outline-none"
+        class="px-4 py-2 mb-px border-b-2 transition focus:outline-none"
         :class="
           activeTab === tab.value
             ? 'border-blue-600 text-blue-600 font-semibold'

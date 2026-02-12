@@ -202,7 +202,7 @@ const tabs = [
 
     <!-- tab with 4 section (minimal design) -->
     <h1 class="mt-20 font-bold text-center">TAB</h1>
-    <div class="flex justify-center items-center p-6 pb-20">
+    <div class="flex flex-col justify-center items-center p-6 pb-20">
       <BaseTabs v-model="activeTab" :tabs="tabs">
         <template #default="{ active }">
           <div v-if="active === 'login'">Login content</div>
