@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, onUnmounted, nextTick, ref } from 'vue'
+import { watch, onUnmounted, nextTick, ref, useId } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -7,6 +7,8 @@ const props = defineProps({
     required: true
   }
 })
+
+const titleId = useId()
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -59,10 +61,12 @@ onUnmounted(() => {
         role="dialog"
         aria-modal="true"
         class="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-lg w-full mx-4 z-10 outline-none"
+        :aria-labelledby="$slots.header ? titleId : undefined"
       >
         <!-- title -->
         <div
           v-if="$slots.header"
+          id="titleId"
           class="px-6 py-4 border-b border-gray-200 dark:border-gray-700"
         >
           <slot name="header" />

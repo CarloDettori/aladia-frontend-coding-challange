@@ -27,6 +27,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  required: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -87,6 +91,8 @@ const inputClasses = computed(() => [
         ]"
         :aria-invalid="!!error"
         :aria-describedby="error ? `${inputId}-error` : undefined"
+        :required="required"
+        :aria-required="required"
         @input="updateValue"
       />
 
@@ -100,7 +106,12 @@ const inputClasses = computed(() => [
     </div>
 
     <!-- error message -->
-    <p v-if="error" :id="`${inputId}-error`" class="mt-1 text-sm text-red-600">
+    <p
+      v-if="error"
+      :id="`${inputId}-error`"
+      class="mt-1 text-sm text-red-600"
+      aria-live="polite"
+    >
       {{ error }}
     </p>
   </div>

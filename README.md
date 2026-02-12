@@ -1,26 +1,31 @@
 # Nuxt UI Component Library
 
-This project is a small UI component library built with Nuxt 3/4 and Vue 3 Composition API as part of a frontend coding challenge.
+This project is a small UI component library built with **Nuxt** and **Vue 3 Composition API** as part of a frontend coding challenge.
 
-the objective is to show modular component design, and clean progect structure
+The objective is to demonstrate:
 
-#PROJECT TECNOLOGIES
+- modular component design
+- reusable UI architecture
+- accessibility awareness
+- clean and scalable project structure
 
-- Nuxt 3/4
-- Vue 3 (Composition API + `<script setup>`)
+---
+
+## Tech Stack
+
+- Nuxt (Vue 3 + `<script setup>`)
 - TypeScript
 - Tailwind CSS
-- ESLint + Prettier
+- ESLint
+- Prettier
 
-##COMPONENTS
+---
 
-inside the folder component
+## Components
 
-─ BaseButton.vue
-─ BaseCard.vue
-─ BaseInputField.vue
-─ BaseModal.vue
-─ BaseTabs.vue
+All reusable components are located inside:
+
+### BaseButton
 
 Reusable button component with variants and sizes.
 
@@ -32,7 +37,7 @@ Reusable button component with variants and sizes.
 
 **Slots**
 
-- default slot for button content
+- default slot (button content)
 
 **Events**
 
@@ -57,29 +62,40 @@ Accessible input field with label and error handling.
 
 - `update:modelValue`
 
+**Accessibility**
+
+- label linked to input
+- aria attributes for error state
+
 ---
 
 ### BaseCard
 
-Simple layout component used as a container.
+Container component used to structure content blocks.
 
 **Slots**
 
-- default slot
+- default
 
 ---
 
 ### BaseModal
 
-Modal dialog with overlay and focus trapping.
+Modal dialog component.
 
 **Props**
 
-- `open`
+- `modelValue` (used via `v-model`)
 
 **Events**
 
-- `close`
+- `update:modelValue`
+
+**Accessibility**
+
+- Escape key closes modal
+- Overlay click closes modal
+- ARIA dialog roles
 
 ---
 
@@ -98,19 +114,33 @@ Accessible tabs component following WAI-ARIA guidelines.
 
 **Accessibility**
 
-- Keyboard navigation (Arrow keys, Home, End)
-- Proper ARIA roles (`tablist`, `tab`, `tabpanel`)
-- Focus management
+- Keyboard navigation (Arrow keys)
+- ARIA roles (`tablist`, `tab`, `tabpanel`)
 
 ---
 
-#EACH COMPONENT RENDERED IN index.vue file
+The index.vue page show how each component can be composed together.
 
-##To run locally
+---
 
+## Code Quality
+
+The project includes:
+
+- ESLint for code linting
+- Prettier for formatting
+
+Available scripts:
+
+```bash
+npm run lint
+npm run lint:fix
+npm run format
+```
+
+## To run locally
+
+```bash
 npm install
 npm run dev
-
-ESLint error check: npm run lint
-ESLint error fix: npm run lint:fix
-Prettier formatting: npm run format
+```

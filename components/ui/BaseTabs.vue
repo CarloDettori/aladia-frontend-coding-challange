@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick } from 'vue'
+import { computed } from 'vue'
 
 //tab properties
 interface TabItem {
@@ -15,7 +15,7 @@ const props = defineProps<{
 
 //update value function
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (_e: 'update:modelValue', _value: string): void
 }>()
 
 //active tab focus
@@ -24,12 +24,11 @@ const activeTab = computed({
   set: (val: string) => emit('update:modelValue', val)
 })
 
-const selectTab = async (value: string, index: number) => {
+const selectTab = async (value: string) => {
   activeTab.value = value
-  await nextTick()
 }
 
-//tabs scroll by arrow buttons
+//tabs scroll by arrow keys
 const handleKeydown = (event: KeyboardEvent) => {
   if (!props.tabs.length) return
 
@@ -58,19 +57,18 @@ const handleKeydown = (event: KeyboardEvent) => {
       <button
         v-for="(tab, index) in tabs"
         :key="tab.value"
-        ref="tabRefs"
         role="tab"
         :id="`tab-${tab.value}`"
         :aria-selected="activeTab === tab.value"
         :aria-controls="`panel-${tab.value}`"
         :tabindex="activeTab === tab.value ? 0 : -1"
-        class="px-4 py-2 -mb-px border-b-2 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="px-4 py-2 -mb-px border-b-2 transition focus:outline-none"
         :class="
           activeTab === tab.value
             ? 'border-blue-600 text-blue-600 font-semibold'
-            : 'border-transparent text-gray-500 hover:text-gray-700'
+            : 'border-transparent text-white hover:text-gray-700'
         "
-        @click="selectTab(tab.value, index)"
+        @click="selectTab(tab.value)"
         @keydown="handleKeydown"
       >
         {{ tab.label }}

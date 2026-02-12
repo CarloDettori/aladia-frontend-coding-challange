@@ -4,7 +4,7 @@ import BaseButton from '~/components/ui/BaseButton.vue'
 import BaseCard from '~/components/ui/BaseCard.vue'
 import BaseModal from '~/components/ui/BaseModal.vue'
 import BaseInputField from '~/components/ui/BaseInputField.vue'
-import BaseTab from '~/components/ui/BaseTab.vue'
+import BaseTabs from '~/components/ui/BaseTabs.vue'
 
 //functions for button click
 function handleClick(variant: string) {
@@ -203,7 +203,7 @@ const tabs = [
     <!-- tab with 4 section (minimal design) -->
     <h1 class="mt-20 font-bold text-center">TAB</h1>
     <div class="flex justify-center items-center p-6 pb-20">
-      <BaseTab v-model="activeTab" :tabs="tabs">
+      <BaseTabs v-model="activeTab" :tabs="tabs">
         <template #default="{ active }">
           <div v-if="active === 'login'">Login content</div>
 
@@ -211,7 +211,7 @@ const tabs = [
           <div v-if="active === 'info'">Info content</div>
           <div v-if="active === 'contact'">Contact information</div>
         </template>
-      </BaseTab>
+      </BaseTabs>
     </div>
   </div>
 </template>

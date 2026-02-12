@@ -51,7 +51,12 @@ const sizeClasses = computed(() => {
 <template>
   <!-- BaseButton Component return -->
   <button
-    :class="[baseClasses, variantClasses, sizeClasses]"
+    :class="[
+      baseClasses,
+      variantClasses,
+      sizeClasses,
+      props.disabled ? 'opacity-70 cursor-not-allowed' : ''
+    ]"
     :disabled="disabled"
     :aria-disabled="disabled"
     @click="emit('click')"
