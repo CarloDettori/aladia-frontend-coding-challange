@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, nextTick } from 'vue'
+import { computed, nextTick } from 'vue'
 
 //tab properties
 interface TabItem {
@@ -18,7 +18,6 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
-
 //active tab focus
 const activeTab = computed({
   get: () => props.modelValue,
@@ -28,16 +27,13 @@ const activeTab = computed({
 const selectTab = async (value: string, index: number) => {
   activeTab.value = value
   await nextTick()
-  
 }
 
 //tabs scroll by arrow buttons
 const handleKeydown = (event: KeyboardEvent) => {
   if (!props.tabs.length) return
 
-  const currentIndex = props.tabs.findIndex(
-    t => t.value === activeTab.value
-  )
+  const currentIndex = props.tabs.findIndex((t) => t.value === activeTab.value)
 
   if (currentIndex === -1) return
 
@@ -48,8 +44,7 @@ const handleKeydown = (event: KeyboardEvent) => {
   }
 
   if (event.key === 'ArrowLeft') {
-    const prevIndex =
-      (currentIndex - 1 + props.tabs.length) % props.tabs.length
+    const prevIndex = (currentIndex - 1 + props.tabs.length) % props.tabs.length
     const prevTab = props.tabs[prevIndex]
     if (prevTab) activeTab.value = prevTab.value
   }
@@ -59,11 +54,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 <template>
   <div>
     <!-- tabs -->
-    <div
-      role="tablist"
-      aria-label="Tabs"
-      class="flex border-b"
-    >
+    <div role="tablist" aria-label="Tabs" class="flex border-b">
       <button
         v-for="(tab, index) in tabs"
         :key="tab.value"
@@ -74,9 +65,11 @@ const handleKeydown = (event: KeyboardEvent) => {
         :aria-controls="`panel-${tab.value}`"
         :tabindex="activeTab === tab.value ? 0 : -1"
         class="px-4 py-2 -mb-px border-b-2 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-        :class="activeTab === tab.value
-  ? 'border-blue-600 text-blue-600 font-semibold'
-  : 'border-transparent text-gray-500 hover:text-gray-700'"
+        :class="
+          activeTab === tab.value
+            ? 'border-blue-600 text-blue-600 font-semibold'
+            : 'border-transparent text-gray-500 hover:text-gray-700'
+        "
         @click="selectTab(tab.value, index)"
         @keydown="handleKeydown"
       >
@@ -86,15 +79,15 @@ const handleKeydown = (event: KeyboardEvent) => {
 
     <!-- panels -->
     <div
-  v-for="tab in tabs"
-  :key="tab.value"
-  role="tabpanel"
-  :id="`panel-${tab.value}`"
-  :aria-labelledby="`tab-${tab.value}`"
-  v-show="activeTab === tab.value"
-  class="mt-4 p-4 rounded-lg border bg-white shadow-sm text-black"
->
-  <slot :active="activeTab" />
-</div>
+      v-for="tab in tabs"
+      :key="tab.value"
+      role="tabpanel"
+      :id="`panel-${tab.value}`"
+      :aria-labelledby="`tab-${tab.value}`"
+      v-show="activeTab === tab.value"
+      class="mt-4 p-4 rounded-lg border bg-white shadow-sm text-black"
+    >
+      <slot :active="activeTab" />
+    </div>
   </div>
 </template>

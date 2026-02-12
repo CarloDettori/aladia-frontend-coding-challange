@@ -4,19 +4,17 @@ This project is a small UI component library built with Nuxt 3/4 and Vue 3 Compo
 
 the objective is to show modular component design, and clean progect structure
 
-
 #PROJECT TECNOLOGIES
+
 - Nuxt 3/4
 - Vue 3 (Composition API + `<script setup>`)
 - TypeScript
 - Tailwind CSS
 - ESLint + Prettier
 
-
 ##COMPONENTS
 
 inside the folder component
-
 
 ─ BaseButton.vue
 ─ BaseCard.vue
@@ -27,14 +25,17 @@ inside the folder component
 Reusable button component with variants and sizes.
 
 **Props**
+
 - `variant`: `'primary' | 'secondary' | 'danger'`
 - `size`: `'sm' | 'md' | 'lg'`
 - `disabled`: `boolean`
 
 **Slots**
+
 - default slot for button content
 
 **Events**
+
 - `click`
 
 ---
@@ -44,6 +45,7 @@ Reusable button component with variants and sizes.
 Accessible input field with label and error handling.
 
 **Props**
+
 - `modelValue`
 - `label`
 - `type`
@@ -52,6 +54,7 @@ Accessible input field with label and error handling.
 - `error`
 
 **Events**
+
 - `update:modelValue`
 
 ---
@@ -61,6 +64,7 @@ Accessible input field with label and error handling.
 Simple layout component used as a container.
 
 **Slots**
+
 - default slot
 
 ---
@@ -70,9 +74,11 @@ Simple layout component used as a container.
 Modal dialog with overlay and focus trapping.
 
 **Props**
+
 - `open`
 
 **Events**
+
 - `close`
 
 ---
@@ -82,18 +88,29 @@ Modal dialog with overlay and focus trapping.
 Accessible tabs component following WAI-ARIA guidelines.
 
 **Props**
+
 - `tabs`: `{ label, value }[]`
 - `modelValue`
 
 **Events**
+
 - `update:modelValue`
 
 **Accessibility**
+
 - Keyboard navigation (Arrow keys, Home, End)
 - Proper ARIA roles (`tablist`, `tab`, `tabpanel`)
 - Focus management
 
 ---
 
-
 #EACH COMPONENT RENDERED IN index.vue file
+
+##To run locally
+
+npm install
+npm run dev
+
+ESLint error check: npm run lint
+ESLint error fix: npm run lint:fix
+Prettier formatting: npm run format

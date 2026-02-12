@@ -43,19 +43,18 @@ function updateValue(event: Event) {
 
 //validation styling
 const inputClasses = computed(() => [
-  "w-full rounded-lg border px-4 py-2 transition outline-none",
+  'w-full rounded-lg border px-4 py-2 transition outline-none',
   props.error
-    ? "border-red-500 focus:ring-2 focus:ring-red-400"
-    : "border-gray-300 focus:ring-2 focus:ring-blue-400",
+    ? 'border-red-500 focus:ring-2 focus:ring-red-400'
+    : 'border-gray-300 focus:ring-2 focus:ring-blue-400',
   props.disabled
-    ? "bg-gray-100 cursor-not-allowed opacity-70"
-    : "bg-white dark:bg-gray-800"
+    ? 'bg-gray-100 cursor-not-allowed opacity-70'
+    : 'bg-white dark:bg-gray-800'
 ])
 </script>
 
 <template>
   <div class="w-full">
-    
     <!-- label -->
     <label
       v-if="label"
@@ -67,7 +66,6 @@ const inputClasses = computed(() => [
 
     <!-- input wrapper -->
     <div class="relative">
-      
       <!-- slot left -->
       <div
         v-if="$slots.left"
@@ -102,13 +100,8 @@ const inputClasses = computed(() => [
     </div>
 
     <!-- error message -->
-    <p
-      v-if="error"
-      :id="`${inputId}-error`"
-      class="mt-1 text-sm text-red-600"
-    >
+    <p v-if="error" :id="`${inputId}-error`" class="mt-1 text-sm text-red-600">
       {{ error }}
     </p>
-
   </div>
 </template>

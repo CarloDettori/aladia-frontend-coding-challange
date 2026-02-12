@@ -12,7 +12,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const modalRef = ref<HTMLElement | null>(null)
 
-    //close modal by clicking out the modal
+//close modal by clicking out the modal
 function close() {
   emit('update:modelValue', false)
 }
@@ -50,10 +50,7 @@ onUnmounted(() => {
       class="fixed inset-0 z-50 flex items-center justify-center"
     >
       <!-- darker overlay -->
-      <div
-        class="absolute inset-0 bg-black/50"
-        @click="close"
-      ></div>
+      <div class="absolute inset-0 bg-black/50" @click="close"></div>
 
       <!-- modal content -->
       <div

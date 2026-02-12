@@ -20,7 +20,8 @@ const props = defineProps({
 //click trigger
 const emit = defineEmits(['click'])
 
-const baseClasses ="rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2"
+const baseClasses =
+  'rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2'
 
 //button appareance
 const variantClasses = computed(() => {
@@ -46,7 +47,6 @@ const sizeClasses = computed(() => {
   }
 })
 </script>
-
 
 <template>
   <!-- BaseButton Component return -->
