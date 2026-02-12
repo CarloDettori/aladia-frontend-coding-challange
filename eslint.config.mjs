@@ -5,6 +5,11 @@ import tsParser from '@typescript-eslint/parser'
 import vueParser from 'vue-eslint-parser'
 
 export default [
+
+  {
+    ignores: ['.nuxt', 'node_modules', '.output', 'dist']
+  },
+
   js.configs.recommended,
 
   // Vue files
